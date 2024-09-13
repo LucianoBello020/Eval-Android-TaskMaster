@@ -32,6 +32,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
         Task task = taskList.get(position);
         holder.tvTaskName.setText(task.getName());
+        holder.tvTaskDate.setText(task.getDate());
         holder.cbTaskCompleted.setChecked(task.isCompleted());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -51,13 +52,14 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     public static class TaskViewHolder extends RecyclerView.ViewHolder {
         TextView tvTaskName;
+        TextView tvTaskDate;
         CheckBox cbTaskCompleted;
 
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTaskName = itemView.findViewById(R.id.tvTaskName);
+            tvTaskDate = itemView.findViewById(R.id.tvTaskDate);
             cbTaskCompleted = itemView.findViewById(R.id.cbTaskCompleted);
         }
     }
 }
-

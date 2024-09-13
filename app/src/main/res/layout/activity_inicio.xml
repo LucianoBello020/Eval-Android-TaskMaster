@@ -7,25 +7,25 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="10dp"
-    android:background="@drawable/fondo3jpg"
+    android:padding="40dp"
+    android:background="@drawable/miawyo"
     tools:context=".MainActivity">
 
-    <!-- Titulo de Bienvenida -->
+    <!-- Imagen GIF -->
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:padding="16dp"
+        android:paddingBottom="20dp"
         android:text="@string/img_wel"
         android:textColor="#13FF20"
-        android:paddingBottom="20dp"
         android:textSize="40sp" />
 
-    <!-- Imagen GIF -->
     <pl.droidsonroids.gif.GifImageView
         android:layout_width="300dp"
-        android:layout_height="167dp"
+        android:layout_height="160dp"
         android:layout_gravity="center"
         android:src="@drawable/hii" />
 

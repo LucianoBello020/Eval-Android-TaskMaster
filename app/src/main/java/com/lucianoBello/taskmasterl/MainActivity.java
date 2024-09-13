@@ -40,17 +40,24 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    //Metodo para modificar en una ventana emergente o de dialogo
+    // Método para eliminar una tarea
+    public void deleteTask(int position) {
+        taskList.remove(position);
+        taskAdapter.notifyItemRemoved(position);
+    }
 
+    // Método para mostrar el diálogo de agregar/editar tarea
     public void showTaskDialog(final Task task, final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(task == null ? "Agregar Tarea" : "Editar Tarea");
 
         View viewInflated = LayoutInflater.from(this).inflate(R.layout.dialog_add_task, (ViewGroup) findViewById(android.R.id.content), false);
-        final EditText input = viewInflated.findViewById(R.id.etTaskName);
+        final EditText inputName = viewInflated.findViewById(R.id.etTaskName);
+        final EditText inputDate = viewInflated.findViewById(R.id.etTaskDate); // Campo de fecha
 
         if (task != null) {
-            input.setText(task.getName());
+            inputName.setText(task.getName());
+            inputDate.setText(task.getDate()); // Establecer la fecha si se está editando
         }
 
         builder.setView(viewInflated);
@@ -58,13 +65,15 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton(task == null ? "Agregar" : "Modificar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String taskName = input.getText().toString();
+                String taskName = inputName.getText().toString();
+                String taskDate = inputDate.getText().toString(); // Obtener la fecha ingresada
                 if (task == null) {
-                    Task newTask = new Task(taskName, false);
+                    Task newTask = new Task(taskName, false, taskDate); // Crear nueva tarea con fecha
                     taskList.add(newTask);
                     taskAdapter.notifyItemInserted(taskList.size() - 1);
                 } else {
                     task.setName(taskName);
+                    task.setDate(taskDate); // Actualizar la fecha de la tarea existente
                     taskAdapter.notifyItemChanged(position);
                 }
                 dialog.dismiss();
@@ -77,6 +86,17 @@ public class MainActivity extends AppCompatActivity {
                 dialog.cancel();
             }
         });
+
+        // Agregar un botón para eliminar la tarea
+        if (task != null) {
+            builder.setNeutralButton("Eliminar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    deleteTask(position);
+                    dialog.dismiss();
+                }
+            });
+        }
 
         builder.show();
     }

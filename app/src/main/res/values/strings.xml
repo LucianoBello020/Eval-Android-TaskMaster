@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">TaskMasterL</string>
-    <string name="tareas">¡Pendientes!</string>
+    <string name="tareas">¡Agenda De Pendientes!</string>
     <string name="image_description">gatito hii</string>
     <string name="img_wel">Bienvenido(a)</string>
+    <string name="txt_btn_tarea">Agregar Tarea</string>
 </resources>
